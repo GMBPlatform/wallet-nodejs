@@ -1,0 +1,99 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset='utf8'>
+  <title> 지갑 정보 </title>
+  <style>
+  #tete
+  {
+    position:fixed; top: 0px; right:0px;
+  }
+  </style>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="web/jquery.qrcode.min.js"></script>
+  <script type="text/javascript" src="web/jquery.qrcode.js"></script>
+  <script type="text/javascript" src="web/qrcode.js"></script>
+
+  <div class="walletInfo" style="text-align:center; width:1400px; margin:0 auto;">
+
+    <fieldset style="float:right; width:40%;">
+      <legend>
+        <h1> QR Code </h1>
+      </legend>
+
+      <div id="extendedPrivateKey" style="margin-left:25%; margin-right:25%">
+        <div id="chk"><a href="http://mofas.io/" target="_blank"><img src="test.jpg" width="257" height="50" style="position: relative; top: 155px; right: 12px;"></a></div>
+      </div>
+      <p><h1>ExtendedPrivateKey</h1></p>
+
+      <div id="masterAddress" style="margin-left:25%; margin-right:25%">
+        <div id="chk"><a href="http://mofas.io/" target="_blank"><img src="test.jpg" width="257" height="50" style="position: relative; top: 155px; right: 12px;"></a></div>
+      </div>
+      <p><h1>MasterNode Address</h1></p>
+    </fieldset>
+
+    <fieldset style="float:left; width:40%;">
+      <legend>
+        <h1> 지갑 정보 </h1>
+      </legend>
+      <p><h1>RandomNumber(*)</h1><textarea id="rng" readonly="readonly" style="background-color:#8fd5ff; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${rng}</textarea></p>
+      <p><h1>PrivateKey</h1><textarea id="privateKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.keyPair.d.toString(16)}</textarea></p>
+      <p><h1>ChainCode</h1><textarea id="chainCode" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.getPublicKeyBuffer().toString('hex')}</textarea></p>
+      <p><h1>PublicKey</h1><textarea id="publicKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.chainCode.toString('hex')}</textarea></p>
+      <p><h1>Extended PrivateKey</h1><textarea id="extendedPrivateKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.toBase58()}</textarea></p>
+      <p><h1>Extended PublicKey</h1><textarea id="extendedPublicKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.neutered().toBase58()}</textarea></p>
+      <br></fieldset>
+    </div>
+
+
+    <div class="walletInfo2" style="width: 1400px; height: 0px; margin: 0 auto; text-align:center;" >
+      <fieldset style="width: 100%">
+        <div style="height:45%"></div>
+        <legend>
+          <h1> 파생된 키 </h1>
+        </legend>
+        <table style="width:100%; border:0; cellspacing:0; cellpadding:0;">
+          <tr>
+            <td width="100%">
+              <div id="mikks_CKD"></div>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+
+    <script type="text/javascript">
+    function testInnerHTML()
+    {
+      var str = "${strCKD}"
+      document.getElementById("mikks_CKD").innerHTML = str;
+    }
+    testInnerHTML();
+    </script>
+
+    <script type="text/javascript">
+
+    jQuery('#extendedPrivateKey').qrcode({
+      render: "table",
+      text: "${masterNode.toBase58()}"
+    });
+
+    jQuery('#masterAddress').qrcode({
+      render: "table",
+      text: "${masterNode.getAddress()}"
+    });
+    </script>
+
+    <script type="text/javascript">
+    function mover(string) {
+      jQuery('#tete').qrcode(string);
+    }
+    function mout() {
+      $("#tete").empty()
+    }
+    </script>
+
+  </body>
+  </html>

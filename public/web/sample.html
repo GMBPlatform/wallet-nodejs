@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset='utf8'>
+  <title> 지갑 정보 </title>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script type="text/javascript" src="web/jquery.qrcode.min.js"></script>
+  <script type="text/javascript" src="web/jquery.qrcode.js"></script>
+  <script type="text/javascript" src="web/qrcode.js"></script>
+
+  <div class="walletInfo" style="text-align:center; width:1400px; margin:0 auto;">
+
+    <fieldset style="float:right; width:40%;">
+      <legend>
+        <h1> QR Code </h1>
+      </legend>
+      <div style="height:45%"></div>
+      <div id="extendedPrivateKey" style="margin-left:25%; margin-right:25%">
+        <div id="chk"><a href="http://mofas.io/" target="_blank"><img src="test.jpg" width="257" height="50" style="position: relative; top: 155px; right: 12px;"></a></div>
+      </div>
+      <p><h1>ExtendedPrivateKey</h1></p>
+    </fieldset>
+
+    <fieldset style="float:left; width:40%;">
+      <legend>
+        <h1> 지갑 정보 </h1>
+      </legend>
+      <p><h1>RandomNumber(*)</h1><textarea id="rng" readonly="readonly" style="background-color:#8fd5ff; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${rng}</textarea></p>
+      <p><h1>PrivateKey</h1><textarea id="privateKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.keyPair.d.toString(16)}</textarea></p>
+      <p><h1>ChainCode</h1><textarea id="chainCode" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.getPublicKeyBuffer().toString('hex')}</textarea></p>
+      <p><h1>PublicKey</h1><textarea id="publicKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.chainCode.toString('hex')}</textarea></p>
+      <p><h1>Extended PrivateKey</h1><textarea id="extendedPrivateKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.toBase58()}</textarea></p>
+      <p><h1>Extended PublicKey</h1><textarea id="extendedPublicKey" readonly="readonly" style="background-color:#eeeeee; width: 700px; height: 50px border:1; overflow:visible; text-overflow:ellipsis">${masterNode.neutered().toBase58()}</textarea></p>
+      <br></fieldset>
+    </div>
+
+
+    <div class="walletInfo2" style="width: 1400px; margin: 0 auto; text-align:center;" >
+      <fieldset style="width: 100%">
+        <div style="height:45%"></div>
+        <legend>
+          <h1> 파생된 키 </h1>
+        </legend>
+        <table border="1">
+          <tr>
+            <th>Title1</th>
+            <th>Title2</th>
+            <th>Title1</th>
+            <th>Title2</th>
+          </tr>
+          <tr>
+            <td>Test11</td>
+            <td>Test12</td>
+            <td>Test11</td>
+            <td>Test12</td>
+          </tr>
+          <tr>
+            <td>Test21</td>
+            <td>Test22</td>
+            <td>Test21</td>
+            <td>Test22</td>
+          </tr>
+        </table>
+
+
+
+        <script>
+        jQuery('#extendedPrivateKey').qrcode({
+          render: "table",
+          text: "${masterNode.toBase58()}"
+        });
+        </script>
+      </body>
+      </html>
